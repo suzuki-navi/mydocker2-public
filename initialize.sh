@@ -10,9 +10,8 @@ chmod 600 $HOME/.mydocker2/credentials.raw.txt
 chmod 600 $HOME/.mydocker2/credentials.raw.txt.1
 
 if [ ! -e $HOME/.mydocker2/credentials.txt ]; then
-    echo -n "Input credential: "
-    read line
-    echo "$line" > $HOME/.mydocker2/credentials.txt
+    echo "cat > ~/.mydocker2/credentials.txt"
+    exit 1
 fi
 
 (
