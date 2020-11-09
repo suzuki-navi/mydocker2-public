@@ -4,8 +4,12 @@ set -Ceu
 mkdir -p $HOME/.mydocker2/credentials
 chmod 700 $HOME/.mydocker2/credentials
 
-touch $HOME/.mydocker2/credentials.raw.txt
-touch $HOME/.mydocker2/credentials.raw.txt.1
+if [ ! -e $HOME/.mydocker2/credentials.raw.txt ]; then
+    touch $HOME/.mydocker2/credentials.raw.txt
+fi
+if [ ! -e $HOME/.mydocker2/credentials.raw.txt.1 ]; then
+    touch $HOME/.mydocker2/credentials.raw.txt.1
+fi
 chmod 600 $HOME/.mydocker2/credentials.raw.txt
 chmod 600 $HOME/.mydocker2/credentials.raw.txt.1
 
@@ -27,7 +31,13 @@ fi
     done
 ) >| $HOME/.mydocker2/credentials.raw.txt
 
-if [ -e $HOME/.mydocker2/credentials/initialize.sh ]; then
-    bash $HOME/.mydocker2/credentials/initialize.sh
+# $HOMEから上書きされることを防ぐためのフラグ
+touch $HOME/.mydocker2/credentials.txt.imported
+
+if [ ! -e $HOME/.mydocker2/private ]; then
+    echo bash $HOME/.mydocker2/credentials/initialize.sh
+    if [ -e $HOME/.mydocker2/credentials/initialize.sh ]; then
+        bash $HOME/.mydocker2/credentials/initialize.sh
+    fi
 fi
 
