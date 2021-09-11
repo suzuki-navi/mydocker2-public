@@ -19,7 +19,7 @@ fi
     cd $HOME/.mydocker2/credentials
 
     tar czf $HOME/.mydocker2/credentials.tar.gz .
-    cat $HOME/.mydocker2/credentials.tar.gz | openssl enc -e -aes256 -pbkdf2 | base64 >| $HOME/.mydocker2/credentials.txt
+    cat $HOME/.mydocker2/credentials.tar.gz | openssl enc -e -aes256 -pbkdf2 | base64 -w200 >| $HOME/.mydocker2/credentials.txt
     echo >> $HOME/.mydocker2/credentials.txt
 
     cat $HOME/.mydocker2/credentials.txt
